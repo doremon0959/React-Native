@@ -4,6 +4,7 @@ import Home from "./HomeComponent";
 import Contact from "./ContactComponent";
 import About from "./AboutComponent";
 import Reservation from "./ReservationComponent";
+import Favorites from "./FavoriteComponent";
 import Dishdetail from "./DishDetailComponent";
 import {
   View,
@@ -189,6 +190,31 @@ const ReservationNavigator = createStackNavigator(
   }
 );
 
+const FavoritesNavigator = createStackNavigator(
+  {
+    Favorites: { screen: Favorites },
+  },
+  {
+    navigationOptions: ({ navigation }) => ({
+      headerStyle: {
+        backgroundColor: "#512DA8",
+      },
+      headerTitleStyle: {
+        color: "#fff",
+      },
+      headerTintColor: "#fff",
+      headerLeft: (
+        <Icon
+          name="menu"
+          size={24}
+          iconStyle={{ color: "white" }}
+          onPress={() => navigation.navigate("DrawerToggle")}
+        />
+      ),
+    }),
+  }
+);
+
 const CustomDrawerContentComponent = (props) => (
   <ScrollView>
     <SafeAreaView
@@ -260,6 +286,21 @@ const MainNavigator = createDrawerNavigator(
             type="font-awesome"
             size={22}
             color={tintColor}
+          />
+        ),
+      },
+    },
+    Favorites: {
+      screen: FavoritesNavigator,
+      navigationOptions: {
+        title: "My Favorites",
+        drawerLabel: "My Favorites",
+        drawerIcon: ({ tintColor, focused }) => (
+          <Icon
+            name="heart"
+            type="font-awesome"
+            size={24}
+            iconStyle={{ color: tintColor }}
           />
         ),
       },
