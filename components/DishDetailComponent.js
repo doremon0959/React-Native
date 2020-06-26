@@ -38,7 +38,7 @@ function RenderDish(props) {
     else return false;
   };
   const recognizeComment = ({ moveX, moveY, dx, dy }) => {
-    if (dx < 200) return true;
+    if (dx > 200) return true;
     else return false;
   };
 
