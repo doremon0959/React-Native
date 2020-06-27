@@ -10,6 +10,7 @@ import {
   TouchableHighlight,
   Alert,
   PanResponder,
+  Share,
 } from "react-native";
 import { Card, Icon, Input, Rating } from "react-native-elements";
 import { baseUrl } from "../shared/baseUrl";
@@ -82,6 +83,19 @@ function RenderDish(props) {
     },
   });
 
+  const shareDish = (title, message, url) => {
+    Share.share(
+      {
+        title: title,
+        message: title + ": " + message + " " + url,
+        url: url,
+      },
+      {
+        dialogTitle: "Share " + title,
+      }
+    );
+  };
+
   if (dish != null) {
     return (
       <Animatable.View
@@ -120,6 +134,19 @@ function RenderDish(props) {
                 color="#4B0082"
                 size={22}
                 onPress={() => props.toggleModal()}
+              />
+            </View>
+            <View>
+              <Icon
+                raised
+                reverse
+                name="share"
+                type="font-awesome"
+                color="#51D2A8"
+                size={22}
+                onPress={() =>
+                  shareDish(dish.name, dish.description, baseUrl + dish.image)
+                }
               />
             </View>
           </View>
